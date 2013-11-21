@@ -1,11 +1,11 @@
 OPERATOR = /// ^ (
-  ?: [-=]>             # function
-   | [-+*/%<>&|^!?=]=  # compound assign / compare
-   | >>>=?             # zero-fill right shift
-   | ([-+:])\1         # doubles
-   | ([&|<>])\2=?      # logic / shift
-   | \?\.              # soak access
-   | \.{2,3}           # range or splat
+  ?: [-=]>             # 函数
+   | [-+*/%<>&|^!?=]=  # 复合赋值 / 比较
+   | >>>=?             # 补 0 右移
+   | ([-+:])\1         # 双精度浮点数
+   | ([&|<>])\2=?      # 逻辑 / 移位
+   | \?\.              # soak 访问
+   | \.{2,3}           # 范围或者打散
 ) ///
 
 

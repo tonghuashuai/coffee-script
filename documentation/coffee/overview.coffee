@@ -1,28 +1,28 @@
-# Assignment:
+# 赋值:
 number   = 42
 opposite = true
 
-# Conditions:
+# 条件:
 number = -42 if opposite
 
-# Functions:
+# 函数:
 square = (x) -> x * x
 
-# Arrays:
+# 数组:
 list = [1, 2, 3, 4, 5]
 
-# Objects:
+# 对象:
 math =
   root:   Math.sqrt
   square: square
   cube:   (x) -> x * square x
 
-# Splats:
+# 打散:
 race = (winner, runners...) ->
   print winner, runners
 
-# Existence:
+# 存在性:
 alert "I knew it!" if elvis?
 
-# Array comprehensions:
+# 数组领悟:
 cubes = (math.cube num for num in list)
