@@ -1,4 +1,4 @@
-# CoffeeScript 的解析器从这个语法文件, 用 [Jison](http://github.com/zaach/jison) 生成的.
+# CoffeeScript 的解析器是从这个语法文件, 用 [Jison](http://github.com/zaach/jison) 生成的.
 # Jison 是个自底而上的解析器生成工具, 和 [Bison](http://www.gnu.org/software/bison) 的风格相似, 不过是用 JavaScript 实现的.
 # 它可以辨认 [LALR(1), LR(0), SLR(1) 和 LR(1)](http://en.wikipedia.org/wiki/LR_grammar) 语法.
 # 为了创建 Jison 解析器, 我们把匹配模式列在左边, 把对应动作列在右边 (通常是创建语法树的节点).
