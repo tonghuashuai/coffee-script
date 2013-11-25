@@ -17,12 +17,12 @@ math =
   square: square
   cube:   (x) -> x * square x
 
-# 打散:
+# Splats:
 race = (winner, runners...) ->
   print winner, runners
 
 # 存在性:
 alert "I knew it!" if elvis?
 
-# 数组领悟:
+# 数组 推导(comprehensions):
 cubes = (math.cube num for num in list)
