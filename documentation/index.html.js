@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-  <title>CoffeeScript</title>
+  <title>CoffeeScript 中文</title>
   <link rel="canonical" href="http://coffeescript.org" />
   <link rel="stylesheet" type="text/css" href="documentation/css/docs.css" />
   <link rel="stylesheet" type="text/css" href="documentation/css/tomorrow.css" />
@@ -95,13 +95,13 @@
 
     <p>
       <b>CoffeeScript 是一门编译到 JavaScript 的小巧语言.</b>
-      在 Java 般笨拙的外表下, JavaScript 其实是内秀.
-      CoffeeScript 是个尝试, 用简洁的方式展示 JavaScript 优秀的部分.
+      在 Java 般笨拙的外表下, JavaScript 其实有着一颗华丽的心脏.
+      CoffeeScript 尝试用简洁的方式展示 JavaScript 优秀的部分.
     </p>
 
     <p>
       CoffeeScript 的指导原则是: <b>"她仅仅是 JavaScript"</b>.
-      她的代码一一对应地编译到 JS, 不会在编译过程中进行解释.
+      代码一一对应地编译到 JS, 不会在编译过程中进行解释.
       已有的 JavaScript 类库可以无缝地和 CoffeeScript 搭配使用, 反之亦然.
       编译后的代码是可读的, 且经过美化, 能在所有 JavaScript 环境中运行,
       并且应该和对应手写的 JavaScript 一样快或者更快.
@@ -120,7 +120,7 @@ sudo npm install -g coffee-script</pre>
       概览
     </h2>
 
-    <p>左边是 CoffeeScript, 右边是编译后的 JavaScript.</p>
+    <p>左边是 CoffeeScript, 右边是编译后输出的 JavaScript.</p>
 
     <%= codeFor('overview', 'cubes', false) %>
 
@@ -134,7 +134,7 @@ sudo npm install -g coffee-script</pre>
       使用了 <a href="http://jison.org">Jison parser generator</a>.
       命令行版本的 <tt>coffee</tt> 是一个实用的 <a href="http://nodejs.org/">Node.js</a> 工具.
       不过<a href="extras/coffee-script.js">编译器</a>并不依赖 Node,
-      而是能做运行于任何 JavaScript 环境, 或者说在浏览器里(看上边的"试一试 CoffeeScript").
+      而是能运行于任何 JavaScript 执行环境, 比如说在浏览器里(看上边的"试一试 CoffeeScript").
     </p>
 
     <p>
@@ -152,7 +152,7 @@ npm install -g coffee-script</pre>
 
     <p>
       如果你希望安装 <b>master</b> 分支上最新的 CoffeeScript,
-      你可以从<a href="http://github.com/jashkenas/coffee-script">源码仓库</a> clone CoffeeScript,
+      你可以从<a href="http://github.com/jashkenas/coffee-script">源码仓库</a> 克隆 CoffeeScript,
       或直接下载<a href="http://github.com/jashkenas/coffee-script/tarball/master">源码</a>.
       还有通过 npm 方式安装 master 分支最新的 CoffeeScript 编译器:
     </p>
@@ -174,7 +174,7 @@ sudo bin/cake install</pre>
     </h2>
 
     <p>
-      安装之后, 应该也可以执行的 <tt>coffee</tt> 命令, 可以用来执行脚本,
+      安装之后, 你应该可以运行 <tt>coffee</tt> 命令以执行脚本,
       编译 <tt>.coffee</tt> 文件到 <tt>.js</tt> 文件, 和提供一个交互式的 REPL.
       <tt>coffee</tt> 命令有下列参数:
     </p>
@@ -183,7 +183,7 @@ sudo bin/cake install</pre>
       <tr>
         <td><code>-c, --compile</code></td>
         <td>
-          编译一个 <tt>.coffee</tt> 脚本到一个同名的 <tt>.js</tt> 的 JavaScript 文件.
+          编译一个 <tt>.coffee</tt> 脚本到一个同名的 <tt>.js</tt> 文件.
         </td>
       </tr>
       <tr>
@@ -195,7 +195,7 @@ sudo bin/cake install</pre>
       <tr>
         <td width="25%"><code>-i, --interactive</code></td>
         <td>
-          启动一个交互式的 CoffeeScript 回话用来尝试一些代码片段.
+          启动一个交互式的 CoffeeScript 会话用来尝试一些代码片段.
           等同于执行 <tt>coffee</tt> 而不加参数.
         </td>
       </tr>
@@ -323,12 +323,9 @@ Expressions
     </h2>
 
     <p>
-      Besides being used as an ordinary programming language, CoffeeScript may
-      also be written in "literate" mode. If you name your file with a
-      <tt>.litcoffee</tt> extension, you can write it as a Markdown document &mdash;
-      a document that also happens to be executable CoffeeScript code. The compiler
-      will treat any indented blocks (Markdown's way of indicating source code)
-      as code, and ignore the rest as comments.
+      除了被作为一个普通的编程语言, CoffeeScript 也可以在 "literate" 模式下编写。
+      如果你以 <tt>.litcoffee</tt> 为扩展名命名你的文件, 你可以把它当作 Markdown 文件来编写 &mdash;
+      此文档恰好也是一份可执行的 CoffeeScript 代码,  编译器将会把所有的缩进块 (Markdown 表示源代码的方式) 视为代码, 其他部分则为注释.
     </p>
 
     <p>

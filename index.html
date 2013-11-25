@@ -122,20 +122,20 @@ sudo npm install -g coffee-script</pre>
 
     <p>左边是 CoffeeScript, 右边是编译后输出的 JavaScript.</p>
 
-    <div class='code'><pre><code><span class="comment"># Assignment:</span>
+    <div class='code'><pre><code><span class="comment"># 赋值:</span>
 number   = <span class="number">42</span>
 opposite = <span class="literal">true</span>
 
-<span class="comment"># Conditions:</span>
+<span class="comment"># 条件:</span>
 number = -<span class="number">42</span> <span class="keyword">if</span> opposite
 
-<span class="comment"># Functions:</span>
+<span class="comment"># 函数:</span>
 <span class="function"><span class="title">square</span> = <span class="params">(x)</span> -&gt;</span> x * x
 
-<span class="comment"># Arrays:</span>
+<span class="comment"># 数组:</span>
 list = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]
 
-<span class="comment"># Objects:</span>
+<span class="comment"># 对象:</span>
 math =
   <span class="attribute">root</span>:   Math.sqrt
   <span class="attribute">square</span>: square
@@ -145,10 +145,10 @@ math =
 <span class="function"><span class="title">race</span> = <span class="params">(winner, runners...)</span> -&gt;</span>
   <span class="built_in">print</span> winner, runners
 
-<span class="comment"># Existence:</span>
+<span class="comment"># 存在性:</span>
 alert <span class="string">"I knew it!"</span> <span class="keyword">if</span> elvis?
 
-<span class="comment"># Array comprehensions:</span>
+<span class="comment"># 数组 推导(comprehensions):</span>
 cubes = (math.cube num <span class="keyword">for</span> num <span class="keyword">in</span> list)
 </code></pre><pre><code><span class="keyword">var</span> cubes, list, math, num, number, opposite, race, square,
   __slice = [].slice;
@@ -194,7 +194,7 @@ cubes = (<span class="function"><span class="keyword">function</span><span class
   }
   <span class="keyword">return</span> _results;
 })();
-</code></pre><script>window.example1 = "# Assignment:\nnumber   = 42\nopposite = true\n\n# Conditions:\nnumber = -42 if opposite\n\n# Functions:\nsquare = (x) -> x * x\n\n# Arrays:\nlist = [1, 2, 3, 4, 5]\n\n# Objects:\nmath =\n  root:   Math.sqrt\n  square: square\n  cube:   (x) -> x * square x\n\n# Splats:\nrace = (winner, runners...) ->\n  print winner, runners\n\n# Existence:\nalert \"I knew it!\" if elvis?\n\n# Array comprehensions:\ncubes = (math.cube num for num in list)\n"</script><div class='minibutton ok' onclick='javascript: var cubes, list, math, num, number, opposite, race, square,
+</code></pre><script>window.example1 = "# 赋值:\nnumber   = 42\nopposite = true\n\n# 条件:\nnumber = -42 if opposite\n\n# 函数:\nsquare = (x) -> x * x\n\n# 数组:\nlist = [1, 2, 3, 4, 5]\n\n# 对象:\nmath =\n  root:   Math.sqrt\n  square: square\n  cube:   (x) -> x * square x\n\n# Splats:\nrace = (winner, runners...) ->\n  print winner, runners\n\n# 存在性:\nalert \"I knew it!\" if elvis?\n\n# 数组 推导(comprehensions):\ncubes = (math.cube num for num in list)\n"</script><div class='minibutton ok' onclick='javascript: var cubes, list, math, num, number, opposite, race, square,
   __slice = [].slice;
 
 number = 42;
@@ -250,7 +250,7 @@ cubes = (function() {
       使用了 <a href="http://jison.org">Jison parser generator</a>.
       命令行版本的 <tt>coffee</tt> 是一个实用的 <a href="http://nodejs.org/">Node.js</a> 工具.
       不过<a href="extras/coffee-script.js">编译器</a>并不依赖 Node,
-      而是能运行于任何 JavaScript 运行环境, 比如说在浏览器里(看上边的"试一试 CoffeeScript").
+      而是能运行于任何 JavaScript 执行环境, 比如说在浏览器里(看上边的"试一试 CoffeeScript").
     </p>
 
     <p>
@@ -290,7 +290,7 @@ sudo bin/cake install</pre>
     </h2>
 
     <p>
-      安装之后, 你应该可以执行 <tt>coffee</tt> 命令, 它可以用来执行脚本,
+      安装之后, 你应该可以运行 <tt>coffee</tt> 命令以执行脚本,
       编译 <tt>.coffee</tt> 文件到 <tt>.js</tt> 文件, 和提供一个交互式的 REPL.
       <tt>coffee</tt> 命令有下列参数:
     </p>
@@ -445,18 +445,19 @@ Expressions
     </p>
 
     <p>
-      为了好玩, 一小部分编译器的代码以这种方式实现:
-      看它们
-      <a href="https://gist.github.com/jashkenas/3fc3c1a8b1009c00d9df">作为文档</a>,
-      <a href="https://raw.github.com/jashkenas/coffee-script/master/src/scope.litcoffee">原文件</a>,
-      和 <a href="http://cl.ly/LxEu">在文本编辑器中正确的高亮</a>.
+      Just for kicks, a little bit of the compiler is currently implemented in this fashion:
+      See it
+      <a href="https://gist.github.com/jashkenas/3fc3c1a8b1009c00d9df">as a document</a>,
+      <a href="https://raw.github.com/jashkenas/coffee-script/master/src/scope.litcoffee">raw</a>,
+      and <a href="http://cl.ly/LxEu">properly highlighted in a text editor</a>.
     </p>
 
     <p>
-      关于语言的这个方向，我相当兴奋, 很期待以这种风格编写 (更重要的是, 阅读) 更多的程序.
-      关于 Literate CoffeeScript 的更多信息, 包含一个
-      <a href="https://github.com/jashkenas/journo">示例程序</a>,
-      已经在这篇 <a href="http://ashkenas.com/literate-coffeescript">博客文章</a> 里.
+      I'm fairly excited about this direction for the language, and am looking
+      forward to writing (and more importantly, reading) more programs in this style.
+      More information about Literate CoffeeScript, including an
+      <a href="https://github.com/jashkenas/journo">example program</a>,
+      are <a href="http://ashkenas.com/literate-coffeescript">available in this blog post</a>.
     </p>
 
     <h2>
@@ -840,14 +841,14 @@ alert("The Field: " + rest);
       Unlike for loops, array comprehensions are expressions, and can be returned
       and assigned.
     </p>
-    <div class='code'><pre><code><span class="comment"># Eat lunch.</span>
+    <div class='code'><pre><code><span class="comment"># 吃午饭.</span>
 eat food <span class="keyword">for</span> food <span class="keyword">in</span> [<span class="string">'toast'</span>, <span class="string">'cheese'</span>, <span class="string">'wine'</span>]
 
-<span class="comment"># Fine five course dining.</span>
+<span class="comment"># 精致的五道菜.</span>
 courses = [<span class="string">'greens'</span>, <span class="string">'caviar'</span>, <span class="string">'truffles'</span>, <span class="string">'roast'</span>, <span class="string">'cake'</span>]
 menu i + <span class="number">1</span>, dish <span class="keyword">for</span> dish, i <span class="keyword">in</span> courses
 
-<span class="comment"># Health conscious meal.</span>
+<span class="comment"># 注重健康的一餐.</span>
 foods = [<span class="string">'broccoli'</span>, <span class="string">'spinach'</span>, <span class="string">'chocolate'</span>]
 eat food <span class="keyword">for</span> food <span class="keyword">in</span> foods <span class="keyword">when</span> food <span class="keyword">isnt</span> <span class="string">'chocolate'</span>
 </code></pre><pre><code><span class="keyword">var</span> courses, dish, food, foods, i, _i, _j, _k, _len, _len1, _len2, _ref;
@@ -873,7 +874,7 @@ foods = [<span class="string">'broccoli'</span>, <span class="string">'spinach'<
     eat(food);
   }
 }
-</code></pre><script>window.example9 = "# Eat lunch.\neat food for food in ['toast', 'cheese', 'wine']\n\n# Fine five course dining.\ncourses = ['greens', 'caviar', 'truffles', 'roast', 'cake']\nmenu i + 1, dish for dish, i in courses\n\n# Health conscious meal.\nfoods = ['broccoli', 'spinach', 'chocolate']\neat food for food in foods when food isnt 'chocolate'\n"</script><div class='minibutton load' onclick='javascript: loadConsole(example9);'>load</div><br class='clear' /></div>
+</code></pre><script>window.example9 = "# 吃午饭.\neat food for food in ['toast', 'cheese', 'wine']\n\n# 精致的五道菜.\ncourses = ['greens', 'caviar', 'truffles', 'roast', 'cake']\nmenu i + 1, dish for dish, i in courses\n\n# 注重健康的一餐.\nfoods = ['broccoli', 'spinach', 'chocolate']\neat food for food in foods when food isnt 'chocolate'\n"</script><div class='minibutton load' onclick='javascript: loadConsole(example9);'>load</div><br class='clear' /></div>
     <p>
       Comprehensions should be able to handle most places where you otherwise
       would use a loop, <b>each</b>/<b>forEach</b>, <b>map</b>, or <b>select</b>/<b>filter</b>, for example:
@@ -975,12 +976,12 @@ ages = (function() {
       as an expression, returning an array containing the result of each iteration
       through the loop.
     </p>
-    <div class='code'><pre><code><span class="comment"># Econ 101</span>
+    <div class='code'><pre><code><span class="comment"># 经济 101</span>
 <span class="keyword">if</span> <span class="keyword">this</span>.studyingEconomics
   buy()  <span class="keyword">while</span> supply &gt; demand
   sell() <span class="keyword">until</span> supply &gt; demand
 
-<span class="comment"># Nursery Rhyme</span>
+<span class="comment"># 摇篮曲</span>
 num = <span class="number">6</span>
 lyrics = <span class="keyword">while</span> num -= <span class="number">1</span>
   <span class="string">"<span class="subst">#{num}</span> little monkeys, jumping on the bed.
@@ -1006,7 +1007,7 @@ lyrics = (<span class="function"><span class="keyword">function</span><span clas
   }
   <span class="keyword">return</span> _results;
 })();
-</code></pre><script>window.example12 = "# Econ 101\nif this.studyingEconomics\n  buy()  while supply > demand\n  sell() until supply > demand\n\n# Nursery Rhyme\nnum = 6\nlyrics = while num -= 1\n  \"#{num} little monkeys, jumping on the bed.\n    One fell out and bumped his head.\"\n"</script><div class='minibutton load' onclick='javascript: loadConsole(example12);'>load</div><div class='minibutton ok' onclick='javascript: var lyrics, num;
+</code></pre><script>window.example12 = "# 经济 101\nif this.studyingEconomics\n  buy()  while supply > demand\n  sell() until supply > demand\n\n# 摇篮曲\nnum = 6\nlyrics = while num -= 1\n  \"#{num} little monkeys, jumping on the bed.\n    One fell out and bumped his head.\"\n"</script><div class='minibutton load' onclick='javascript: loadConsole(example12);'>load</div><div class='minibutton ok' onclick='javascript: var lyrics, num;
 
 if (this.studyingEconomics) {
   while (supply > demand) {
@@ -1200,7 +1201,7 @@ six = (one = 1) + (two = 2) + (three = 3);
       by wrapping them in a closure. This lets you do useful things, like assign
       the result of a comprehension to a variable:
     </p>
-    <div class='code'><pre><code><span class="comment"># The first ten global properties.</span>
+    <div class='code'><pre><code><span class="comment"># 前十个全局属性(变量).</span>
 
 globals = (name <span class="keyword">for</span> name <span class="keyword">of</span> <span class="built_in">window</span>)[<span class="number">0.</span>.<span class="number">.10</span>]</code></pre><pre><code><span class="keyword">var</span> globals, name;
 
@@ -1212,7 +1213,7 @@ globals = ((<span class="function"><span class="keyword">function</span><span cl
   }
   <span class="keyword">return</span> _results;
 })()).slice(<span class="number">0</span>, <span class="number">10</span>);
-</code></pre><script>window.example18 = "# The first ten global properties.\n\nglobals = (name for name of window)[0...10]"</script><div class='minibutton load' onclick='javascript: loadConsole(example18);'>load</div><div class='minibutton ok' onclick='javascript: var globals, name;
+</code></pre><script>window.example18 = "# 前十个全局属性(变量).\n\nglobals = (name for name of window)[0...10]"</script><div class='minibutton load' onclick='javascript: loadConsole(example18);'>load</div><div class='minibutton ok' onclick='javascript: var globals, name;
 
 globals = ((function() {
   var _results;
@@ -1657,7 +1658,7 @@ _ref = [theSwitch, theBait], theBait = _ref[0], theSwitch = _ref[1];
       values.
     </p>
     <div class='code'><pre><code><span class="function"><span class="title">weatherReport</span> = <span class="params">(location)</span> -&gt;</span>
-  <span class="comment"># Make an Ajax request to fetch the weather...</span>
+  <span class="comment"># 发起一个 Ajax 请求获取天气...</span>
   [location, <span class="number">72</span>, <span class="string">"Mostly Sunny"</span>]
 
 [city, temp, forecast] = weatherReport <span class="string">"Berkeley, CA"</span>
@@ -1672,7 +1673,7 @@ weatherReport = <span class="function"><span class="keyword">function</span><spa
 };
 
 _ref = weatherReport(<span class="string">"Berkeley, CA"</span>), city = _ref[<span class="number">0</span>], temp = _ref[<span class="number">1</span>], forecast = _ref[<span class="number">2</span>];
-</code></pre><script>window.example26 = "weatherReport = (location) ->\n  # Make an Ajax request to fetch the weather...\n  [location, 72, \"Mostly Sunny\"]\n\n[city, temp, forecast] = weatherReport \"Berkeley, CA\"\n\n\n\n\n"</script><div class='minibutton load' onclick='javascript: loadConsole(example26);'>load</div><div class='minibutton ok' onclick='javascript: var city, forecast, temp, weatherReport, _ref;
+</code></pre><script>window.example26 = "weatherReport = (location) ->\n  # 发起一个 Ajax 请求获取天气...\n  [location, 72, \"Mostly Sunny\"]\n\n[city, temp, forecast] = weatherReport \"Berkeley, CA\"\n\n\n\n\n"</script><div class='minibutton load' onclick='javascript: loadConsole(example26);'>load</div><div class='minibutton ok' onclick='javascript: var city, forecast, temp, weatherReport, _ref;
 
 weatherReport = function(location) {
   return [location, 72, "Mostly Sunny"];
@@ -2111,20 +2112,20 @@ Released under the MIT License
       regular expressions readable. To quote from the CoffeeScript source:
     </p>
     <div class='code'><pre><code>OPERATOR = <span class="regexp">/// ^ (
-  ?: [-=]&gt;             <span class="comment"># function</span>
-   | [-+*/%&lt;&gt;&amp;|^!?=]=  <span class="comment"># compound assign / compare</span>
-   | &gt;&gt;&gt;=?             <span class="comment"># zero-fill right shift</span>
-   | ([-+:])\1         <span class="comment"># doubles</span>
-   | ([&amp;|&lt;&gt;])\2=?      <span class="comment"># logic / shift</span>
-   | \?\.              <span class="comment"># soak access</span>
-   | \.{2,3}           <span class="comment"># range or splat</span>
+  ?: [-=]&gt;             <span class="comment"># 函数</span>
+   | [-+*/%&lt;&gt;&amp;|^!?=]=  <span class="comment"># 复合赋值 / 比较</span>
+   | &gt;&gt;&gt;=?             <span class="comment"># 补 0 右移</span>
+   | ([-+:])\1         <span class="comment"># 双写</span>
+   | ([&amp;|&lt;&gt;])\2=?      <span class="comment"># 逻辑 / 移位</span>
+   | \?\.              <span class="comment"># soak 访问</span>
+   | \.{2,3}           <span class="comment"># 范围或者 splat</span>
 ) ///</span>
 
 
 </code></pre><pre><code><span class="keyword">var</span> OPERATOR;
 
 OPERATOR = <span class="regexp">/^(?:[-=]&gt;|[-+*\/%&lt;&gt;&amp;|^!?=]=|&gt;&gt;&gt;=?|([-+:])\1|([&amp;|&lt;&gt;])\2=?|\?\.|\.{2,3})/</span>;
-</code></pre><script>window.example41 = "OPERATOR = /// ^ (\n  ?: [-=]>             # function\n   | [-+*/%<>&|^!?=]=  # compound assign / compare\n   | >>>=?             # zero-fill right shift\n   | ([-+:])\\1         # doubles\n   | ([&|<>])\\2=?      # logic / shift\n   | \\?\\.              # soak access\n   | \\.{2,3}           # range or splat\n) ///\n\n\n"</script><div class='minibutton load' onclick='javascript: loadConsole(example41);'>load</div><br class='clear' /></div>
+</code></pre><script>window.example41 = "OPERATOR = /// ^ (\n  ?: [-=]>             # 函数\n   | [-+*/%<>&|^!?=]=  # 复合赋值 / 比较\n   | >>>=?             # 补 0 右移\n   | ([-+:])\\1         # 双写\n   | ([&|<>])\\2=?      # 逻辑 / 移位\n   | \\?\\.              # soak 访问\n   | \\.{2,3}           # 范围或者 splat\n) ///\n\n\n"</script><div class='minibutton load' onclick='javascript: loadConsole(example41);'>load</div><br class='clear' /></div>
 
 
     <h2>
@@ -3367,5 +3368,3 @@ task(<span class="string">'build:parser'</span>, <span class="string">'rebuild t
 
 </body>
 </html>
-  <title>CoffeeScript</title>
-          编译一个 <tt>.coffee</tt> 脚本到一个同名的 <tt>.js</tt> 的 JavaScript 文件.
