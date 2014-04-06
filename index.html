@@ -9,6 +9,9 @@
   <link rel="shortcut icon" href="documentation/images/favicon.ico" />
 </head>
 <body>
+  <a href="https://github.com/coffee-js/coffee-script">
+    <img style="position: fixed; top: 0; right: 0; border: 0; z-index: 200;" src="http://coffee-js.qiniudn.com/ribbon.png" alt="Fork me on GitHub">
+  </a>
 
   <div id="fadeout"></div>
 
