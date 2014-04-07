@@ -26,7 +26,7 @@
         <a href="#installation">安装</a>
         <a href="#usage">用法</a>
         <a href="#literate">Literate CoffeeScript</a>
-        <a href="#language">Language Reference</a>
+        <a href="#language">语言手册</a>
         <a href="#literals">Literals: Functions, Objects and Arrays</a>
         <a href="#lexical-scope">Lexical Scoping and Variable Safety</a>
         <a href="#conditionals">If, Else, Unless, and Conditional Assignment</a>
@@ -349,40 +349,37 @@ Expressions
 
     <h2>
       <span id="language" class="bookmark"></span>
-      Language Reference
+      语言手册
     </h2>
 
     <p>
       <i>
-        This reference is structured so that it can be read from top to bottom,
-        if you like. Later sections use ideas and syntax previously introduced.
-        Familiarity with JavaScript is assumed.
-        In all of the following examples, the source CoffeeScript is provided on
-        the left, and the direct compilation into JavaScript is on the right.
+        这份手册所设计的结构, 方便从上往下进行阅读. 后边的章节使用起前面介绍的语法和手法.
+        阅读着份手册需要对 JavaScript 比较熟悉.
+        以下所有的例子, CoffeeScript 源码将在左边显示, 并在右侧直接编译到 JavaScript.
       </i>
     </p>
 
     <p>
       <i>
-        Many of the examples can be run (where it makes sense) by pressing the <b>run</b>
-        button on the right, and can be loaded into the "Try CoffeeScript"
-        console by pressing the <b>load</b> button on the left.
+        很多例子可以通过点击右边的 <b>run</b> 按钮直接运行(代码有意义的话),
+        也可以通过点击左边的 <b>load</b> 按钮载入"试一试 CoffeeScript"的控制台.
       </i>
     <p>
-      First, the basics: CoffeeScript uses significant whitespace to delimit blocks of code.
-      You don't need to use semicolons <tt>;</tt> to terminate expressions,
-      ending the line will do just as well (although semicolons can still
-      be used to fit multiple expressions onto a single line).
-      Instead of using curly braces
-      <tt>{ }</tt> to surround blocks of code in <a href="#literals">functions</a>,
-      <a href="#conditionals">if-statements</a>,
-      <a href="#switch">switch</a>, and <a href="#try">try/catch</a>,
-      use indentation.
+      首先, 一些基础, CoffeeScript 使用显式的空白来区分代码块.
+      你不需要使用分号 <tt>;</tt> 来关闭表达式,
+      在一行的结尾换行就可以了(尽管分号依然可以用来把多行的表达式整合到一个行里).
+      不要再用花括号来
+      <tt>{ }</tt> 包裹代码快, 在 <a href="#literals">函数</a>,
+      <a href="#conditionals">if 表达式</a>,
+      <a href="#switch">switch</a>, 和 <a href="#try">try/catch</a> 当中,
+      使用缩进.
     </p>
 
     <p>
-      You don't need to use parentheses to invoke a function if you're passing
-      arguments. The implicit call wraps forward to the end of the line or block expression.<br />
+      传入参数的时候, 你不需要再使用圆括号来表明函数被执行.
+      隐式的函数调用的作用范围一直到行尾或者一个块级表达式.
+      <br />
       <tt>console.log sys.inspect object</tt> &rarr; <tt>console.log(sys.inspect(object));</tt>
     </p>
 
