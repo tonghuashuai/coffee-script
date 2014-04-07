@@ -470,8 +470,8 @@ Expressions
 
     <p>
       <i>
-        这份手册所设计的结构, 方便从上往下进行阅读. 后边的章节使用起前面介绍的语法和手法.
-        阅读着份手册需要对 JavaScript 比较熟悉.
+        这份手册所设计的结构, 方便从上往下进行阅读. 后边的章节使用前面介绍的语法和手法.
+        阅读这份手册需要对 JavaScript 比较熟悉.
         以下所有的例子, CoffeeScript 源码将在左边显示, 并在右侧直接编译到 JavaScript.
       </i>
     </p>
@@ -484,12 +484,11 @@ Expressions
     <p>
       首先, 一些基础, CoffeeScript 使用显式的空白来区分代码块.
       你不需要使用分号 <tt>;</tt> 来关闭表达式,
-      在一行的结尾换行就可以了(尽管分号依然可以用来把多行的表达式整合到一个行里).
-      不要再用花括号来
+      在一行的结尾换行就可以了(尽管分号依然可以用来把多行的表达式简写到一行里).
+      不需要再用花括号来
       <tt>{ }</tt> 包裹代码快, 在 <a href="#literals">函数</a>,
       <a href="#conditionals">if 表达式</a>,
-      <a href="#switch">switch</a>, 和 <a href="#try">try/catch</a> 当中,
-      使用缩进.
+      <a href="#switch">switch</a>, 和 <a href="#try">try/catch</a> 当中使用缩进.
     </p>
 
     <p>
@@ -626,8 +625,8 @@ kids = {
 };
 ;alert(song.join(" ... "));'>run: song.join(" ... ")</div><br class='clear' /></div>
     <p>
-      JavaScript 里, 你不能使用保留字段作为属性名称而不添加引号, 比如 <tt>class</tt>.
-      CoffeeScript 里作为键出现的保留字会被认出来并被加上引号,
+      JavaScript 里, 你不能使用不添加引号的保留字段作为属性名称, 比如 <tt>class</tt>.
+      CoffeeScript 里作为键出现的保留字会被识别并补上引号,
       所以你不用有额外的操心(比如说, 使用 jQuery 的时候).
     </p>
     <div class='code'><pre><code>$('.account').attr class: 'active'
@@ -677,7 +676,7 @@ inner = changeNumbers();
 ;alert(inner);'>run: inner</div><br class='clear' /></div>
     <p>
       注意所有变量的定义都被推到相关的顶层作用域, 也就是第一次出现的位置.
-      <b>outer</b> 在内层的函数里没有被重新定义, 因为他已经存在于作用域当中了.
+      <b>outer</b> 在内层的函数里没有被重新定义, 因为它已经存在于作用域当中了.
       同时, 内层函数里的 <b>inner</b> 不应该改变外部的同名的变量, 所以在这里有自己的声明.
     </p>
     <p>
@@ -686,10 +685,9 @@ inner = changeNumbers();
       所以在写深层的嵌套的函数时, 注意不要意外用到和外部变量相同的名字.
     </p>
     <p>
-      Although suppressed within this documentation for clarity, all
       尽管要说清楚会受到文档长度限制, 函数的所有 CoffeeScript 结果都被一个匿名函数包裹:
       <tt>(function(){ ... })();</tt>
-      这层安全的封装, 加上自动生成的 <tt>var</tt> 关键字, 使得不小心污染全局命名空间成为很难的事情.
+      这层安全的封装, 加上自动生成的 <tt>var</tt> 关键字, 使得不小心污染全局命名空间很难发生.
     </p>
     <p>
       如果你希望创建一个其他脚本也能使用的顶层变量, 那么将其作为赋值在 <b>window</b> 上,
@@ -702,12 +700,12 @@ inner = changeNumbers();
       <span id="conditionals" class="bookmark"></span>
       <b class="header">if, else, unless 和条件赋值</b>
       <b>if/else</b> 表达式可以不用圆括号和花括号就写出来.
-      就像函数和其他块级表达式那样, 多行的条件可以通过缩进了表明.
+      就像函数和其他块级表达式那样, 多行的条件可以通过缩进来表明.
       另外还有一个顺手的后缀形式, 在行尾使用 <tt>if</tt> or <tt>unless</tt>.
     </p>
     <p>
       CoffeeScript 会尝试编译 <b>if</b> 语句到 JavaScript 表达式, 或者一个封装的闭包.
-      CoffeeScript 里不存在直白的三元表达是.
+      CoffeeScript 里不存在直白的三元表达式.
       &mdash; 你只要在一行内使用普通的 <b>if</b> 语句.
     </p>
     <div class='code'><pre><code>mood = greatlyImproved <span class="keyword">if</span> singing
@@ -740,11 +738,10 @@ date = friday ? sue : jill;
 
     <p>
       <span id="splats" class="bookmark"></span>
-      <b class="header">Splats...</b>
-      The JavaScript <b>arguments object</b> is a useful way to work with
-      functions that accept variable numbers of arguments. CoffeeScript provides
-      splats <tt>...</tt>, both for function definition as well as invocation,
-      making variable numbers of arguments a little bit more palatable.
+      <b class="header">变参(splats)...</b>
+      使用 JavaScript 的 <b>arguments 对象</b>是一种处理接收不定数量个参数的函数常用办法.
+      CoffeeScript 在函数定义和调用里提供了变参(splats) <tt>...</tt> 的语法,
+      让不定个数的参数使用起来更愉悦一些.
     </p>
     <div class='code'><pre><code>gold = silver = rest = <span class="string">"unknown"</span>
 
