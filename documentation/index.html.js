@@ -2,6 +2,7 @@
 <html>
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <meta name="description" content="CoffeeScript 中文, Unfancy JavaScript, 翻译">
   <title>CoffeeScript 中文</title>
   <link rel="canonical" href="http://coffeescript.org" />
   <link rel="stylesheet" type="text/css" href="documentation/css/docs.css" />
@@ -27,10 +28,10 @@
         <a href="#usage">用法</a>
         <a href="#literate">Literate CoffeeScript</a>
         <a href="#language">语言手册</a>
-        <a href="#literals">Literals: Functions, Objects and Arrays</a>
-        <a href="#lexical-scope">Lexical Scoping and Variable Safety</a>
-        <a href="#conditionals">If, Else, Unless, and Conditional Assignment</a>
-        <a href="#splats">Splats...</a>
+        <a href="#literals">字面量: 函数, 对象和数组</a>
+        <a href="#lexical-scope">词法作用域和变量安全</a>
+        <a href="#conditionals">if, else, unless 和条件赋值</a>
+        <a href="#splats">变参(splats)...</a>
         <a href="#loops">Loops and Comprehensions</a>
         <a href="#slices">Array Slicing and Splicing</a>
         <a href="#expressions">Everything is an Expression</a>
@@ -354,8 +355,8 @@ Expressions
 
     <p>
       <i>
-        这份手册所设计的结构, 方便从上往下进行阅读. 后边的章节使用起前面介绍的语法和手法.
-        阅读着份手册需要对 JavaScript 比较熟悉.
+        这份手册所设计的结构, 方便从上往下进行阅读. 后边的章节使用前面介绍的语法和手法.
+        阅读这份手册需要对 JavaScript 比较熟悉.
         以下所有的例子, CoffeeScript 源码将在左边显示, 并在右侧直接编译到 JavaScript.
       </i>
     </p>
@@ -368,12 +369,11 @@ Expressions
     <p>
       首先, 一些基础, CoffeeScript 使用显式的空白来区分代码块.
       你不需要使用分号 <tt>;</tt> 来关闭表达式,
-      在一行的结尾换行就可以了(尽管分号依然可以用来把多行的表达式整合到一个行里).
-      不要再用花括号来
+      在一行的结尾换行就可以了(尽管分号依然可以用来把多行的表达式简写到一行里).
+      不需要再用花括号来
       <tt>{ }</tt> 包裹代码快, 在 <a href="#literals">函数</a>,
       <a href="#conditionals">if 表达式</a>,
-      <a href="#switch">switch</a>, 和 <a href="#try">try/catch</a> 当中,
-      使用缩进.
+      <a href="#switch">switch</a>, 和 <a href="#try">try/catch</a> 当中使用缩进.
     </p>
 
     <p>
@@ -385,96 +385,82 @@ Expressions
 
     <p>
       <span id="literals" class="bookmark"></span>
-      <b class="header">Functions</b>
-      Functions are defined by an optional list of parameters in parentheses,
-      an arrow, and the function body. The empty function looks like this:
+      <b class="header">函数</b>
+      函数通过一组可选的圆括号包裹的参数, 一个箭头, 一个函数体来定义.
+      一个空的函数像是这样:
       <tt>-></tt>
     </p>
     <%= codeFor('functions', 'cube(5)') %>
     <p>
-      Functions may also have default values for arguments, which will be used
-      if the incoming argument is missing (<tt>null</tt> or <tt>undefined</tt>).
+      一些函数函数参数会有默认值, 当传入的参数的不存在 (<tt>null</tt> 或者 <tt>undefined</tt>)
+      时会被使用.
     </p>
     <%= codeFor('default_args', 'fill("cup")') %>
 
     <p>
       <span id="objects_and_arrays" class="bookmark"></span>
-      <b class="header">Objects and Arrays</b>
-      The CoffeeScript literals for objects and arrays look very similar to
-      their JavaScript cousins. When each property is listed on its own line,
-      the commas are optional. Objects may be created using indentation instead
-      of explicit braces, similar to <a href="http://yaml.org">YAML</a>.
+      <b class="header">对象和数组</b>
+      CoffeeScript 中对象和数组的字面量看起来很像在 JavaScript 中的写法.
+      如果单个属性被写在自己的一行里, 那么逗号是可以省略的.
+      和 <a href="http://yaml.org">YAML</a> 类似, 对象可以用缩进替代花括号来声明.
     </p>
     <%= codeFor('objects_and_arrays', 'song.join(" ... ")') %>
     <p>
-      In JavaScript, you can't use reserved words, like <tt>class</tt>, as properties
-      of an object, without quoting them as strings. CoffeeScript notices reserved words
-      used as keys in objects and quotes them for you, so you don't have to worry
-      about it (say, when using jQuery).
+      JavaScript 里, 你不能使用不添加引号的保留字段作为属性名称, 比如 <tt>class</tt>.
+      CoffeeScript 里作为键出现的保留字会被识别并补上引号,
+      所以你不用有额外的操心(比如说, 使用 jQuery 的时候).
     </p>
     <%= codeFor('objects_reserved') %>
 
     <p>
       <span id="lexical-scope" class="bookmark"></span>
-      <b class="header">Lexical Scoping and Variable Safety</b>
-      The CoffeeScript compiler takes care to make sure that all of your variables
-      are properly declared within lexical scope &mdash; you never need to write
-      <tt>var</tt> yourself.
+      <b class="header">词法作用域和变量安全</b>
+      CoffeeScript 编译器会考虑所有变量, 保证每个变量都在词法域里适当地被定义
+      &mdash; 你永远不需要自己去写 <tt>var</tt>.
     </p>
     <%= codeFor('scope', 'inner') %>
     <p>
-      Notice how all of the variable declarations have been pushed up to
-      the top of the closest scope, the first time they appear.
-      <b>outer</b> is not redeclared within the inner function, because it's
-      already in scope; <b>inner</b> within the function, on the other hand,
-      should not be able to change the value of the external variable of the same name, and
-      therefore has a declaration of its own.
+      注意所有变量的定义都被推到相关的顶层作用域, 也就是第一次出现的位置.
+      <b>outer</b> 在内层的函数里没有被重新定义, 因为它已经存在于作用域当中了.
+      同时, 内层函数里的 <b>inner</b> 不应该改变外部的同名的变量, 所以在这里有自己的声明.
     </p>
     <p>
-      This behavior is effectively identical to Ruby's scope for local variables.
-      Because you don't have direct access to the <tt>var</tt> keyword,
-      it's impossible to shadow an outer variable on purpose, you may only refer
-      to it. So be careful that you're not reusing the name of an external
-      variable accidentally, if you're writing a deeply nested function.
+      其行为和 Ruby 的局部变量的作用域实际上是一致的.
+      由于你没有对 <tt>var</tt> 关键字的直接访问, 根据需要隐藏一个外部变量就很容易, 你只能引用它.
+      所以在写深层的嵌套的函数时, 注意不要意外用到和外部变量相同的名字.
     </p>
     <p>
-      Although suppressed within this documentation for clarity, all
-      CoffeeScript output is wrapped in an anonymous function:
-      <tt>(function(){ ... })();</tt> This safety wrapper, combined with the
-      automatic generation of the <tt>var</tt> keyword, make it exceedingly difficult
-      to pollute the global namespace by accident.
+      尽管要说清楚会受到文档长度限制, 函数的所有 CoffeeScript 结果都被一个匿名函数包裹:
+      <tt>(function(){ ... })();</tt>
+      这层安全的封装, 加上自动生成的 <tt>var</tt> 关键字, 使得不小心污染全局命名空间很难发生.
     </p>
     <p>
-      If you'd like to create top-level variables for other scripts to use,
-      attach them as properties on <b>window</b>, or on the <b>exports</b>
-      object in CommonJS. The <b>existential operator</b> (covered below), gives you a
-      reliable way to figure out where to add them; if you're targeting both
-      CommonJS and the browser: <tt>exports ? this</tt>
+      如果你希望创建一个其他脚本也能使用的顶层变量, 那么将其作为赋值在 <b>window</b> 上,
+      或者在 CommonJS 里的 <b>exports</b> 上.
+      <b>存在操作符(existential operator)</b>可以帮你写出一个可靠的方式找到添加位置;
+      比如你的目标是同时满足 CommonJS 和浏览器: <tt>exports ? this</tt>
     </p>
 
     <p>
       <span id="conditionals" class="bookmark"></span>
-      <b class="header">If, Else, Unless, and Conditional Assignment</b>
-      <b>If/else</b> statements can be written without the use of parentheses and
-      curly brackets. As with functions and other block expressions,
-      multi-line conditionals are delimited by indentation. There's also a handy
-      postfix form, with the <tt>if</tt> or <tt>unless</tt> at the end.
+      <b class="header">if, else, unless 和条件赋值</b>
+      <b>if/else</b> 表达式可以不用圆括号和花括号就写出来.
+      就像函数和其他块级表达式那样, 多行的条件可以通过缩进来表明.
+      另外还有一个顺手的后缀形式, 在行尾使用 <tt>if</tt> or <tt>unless</tt>.
     </p>
     <p>
-      CoffeeScript can compile <b>if</b> statements into JavaScript expressions,
-      using the ternary operator when possible, and closure wrapping otherwise. There
-      is no explicit ternary statement in CoffeeScript &mdash; you simply use
-      a regular <b>if</b> statement on a single line.
+      CoffeeScript 会尝试编译 <b>if</b> 语句到 JavaScript 表达式, 或者一个封装的闭包.
+      CoffeeScript 里不存在直白的三元表达式.
+      &mdash; 你只要在一行内使用普通的 <b>if</b> 语句.
     </p>
     <%= codeFor('conditionals') %>
 
     <p>
       <span id="splats" class="bookmark"></span>
-      <b class="header">Splats...</b>
-      The JavaScript <b>arguments object</b> is a useful way to work with
-      functions that accept variable numbers of arguments. CoffeeScript provides
-      splats <tt>...</tt>, both for function definition as well as invocation,
-      making variable numbers of arguments a little bit more palatable.
+      <b class="header">变参(splats)...</b>
+      使用 JavaScript 的 <b>arguments 对象</b>是一种处理接收不定数量个参数的函数常用办法.
+      CoffeeScript 在函数定义和调用里提供了变参(splats) <tt>...</tt> 的语法,
+      让不定个数的参数使用起来更愉悦一些.
     </p>
     <%= codeFor('splats', true) %>
 
