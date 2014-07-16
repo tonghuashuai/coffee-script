@@ -10,13 +10,14 @@
   <link rel="shortcut icon" href="documentation/images/favicon.ico" />
 </head>
 <body>
-  <a href="https://github.com/coffee-js/coffee-script">
-    <img style="position: fixed; top: 0; right: 0; border: 0; z-index: 200;" src="http://coffee-js.qiniudn.com/ribbon.png" alt="Fork me on GitHub">
-  </a>
+
 
   <div id="fadeout"></div>
 
   <div id="flybar">
+    <a href="https://github.com/coffee-js/coffee-script">
+      <img style="position: fixed; top: 0; right: 0; border: 0; z-index: 200;" src="http://coffee-js.qiniudn.com/ribbon.png" alt="Fork me on GitHub">
+    </a>
     <a id="logo" href="#top"><img src="documentation/images/logo.png" width="225" height="39" alt="CoffeeScript" /></a>
     <div class="navigation toc">
       <div class="button">
@@ -2465,7 +2466,7 @@ task(<span class="string">'build:parser'</span>, <span class="string">'rebuild t
           Closing brackets can now be indented and therefore no longer cause unexpected error.
         </li>
         <li>
-          Several breaking compilation fixes. Non-callable literals (strings, numbers etc.) don't compile in a call now and multiple postfix conditionals compile properly. Postfix conditionals and loops always bind object literals. Conditional assignment compiles properly in subexpressions. <tt>super</tt> is disallowed outside of methods and works correctly inside <tt>for</tt> loops. 
+          Several breaking compilation fixes. Non-callable literals (strings, numbers etc.) don't compile in a call now and multiple postfix conditionals compile properly. Postfix conditionals and loops always bind object literals. Conditional assignment compiles properly in subexpressions. <tt>super</tt> is disallowed outside of methods and works correctly inside <tt>for</tt> loops.
         </li>
         <li>
           Formatting of compiled block comments has been improved.
