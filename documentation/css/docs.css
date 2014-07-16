@@ -245,6 +245,7 @@ div.code {
         width: auto; height: auto;
         left: 40px; top: 90px; right: 40px; bottom: 30px;
         background: -webkit-gradient(linear, left top, left bottom, from(#fafafa), to(#eaeaea));
+        z-index: 300;
       }
         .navigation .repl_bridge {
           position: absolute;
