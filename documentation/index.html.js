@@ -33,7 +33,7 @@
         <a href="#lexical-scope">词法作用域和变量安全</a>
         <a href="#conditionals">if, else, unless 和条件赋值</a>
         <a href="#splats">变参(splats)...</a>
-        <a href="#loops">Loops and Comprehensions</a>
+        <a href="#loops">循环和推导式</a>
         <a href="#slices">Array Slicing and Splicing</a>
         <a href="#expressions">Everything is an Expression</a>
         <a href="#operators">Operators and Aliases</a>
@@ -467,59 +467,49 @@ Expressions
 
     <p>
       <span id="loops" class="bookmark"></span>
-      <b class="header">Loops and Comprehensions</b>
-      Most of the loops you'll write in CoffeeScript will be <b>comprehensions</b>
-      over arrays, objects, and ranges. Comprehensions replace (and compile into)
-      <b>for</b> loops, with optional guard clauses and the value of the current array index.
-      Unlike for loops, array comprehensions are expressions, and can be returned
-      and assigned.
+      <b class="header">循环和推导式</b>
+      你可以使用CoffeeScript将大多数的循环写成基于数组、对象或范围的推导式(comprehensions)。
+      推导式替代（编译为）<b>for</b>循环，并且可以使用附加的子句和数组索引值。
+      不同于<b>for</b>循环，数组的推导式是表达式，可以有返回值和赋值。
     </p>
     <%= codeFor('array_comprehensions') %>
     <p>
-      Comprehensions should be able to handle most places where you otherwise
-      would use a loop, <b>each</b>/<b>forEach</b>, <b>map</b>, or <b>select</b>/<b>filter</b>, for example:
+      推导式可以适用于其他一些使用循环的地方，例如<b>each</b>/<b>forEach</b>,
+      <b>map</b>，或者<b>select/</b><b>filter</b>，例如：
       <tt>shortNames = (name for name in list when name.length &lt; 5)</tt><br />
-      If you know the start and end of your loop, or would like to step through
-      in fixed-size increments, you can use a range to specify the start and
-      end of your comprehension.
+      如果你知道循环的开始与结束，或者希望以固定的跨度迭代，你可以在范围推导式中
+      指定开始与结束。
     </p>
     <%= codeFor('range_comprehensions', 'countdown') %>
     <p>
-      Note how because we are assigning the value of the comprehensions to a
-      variable in the example above, CoffeeScript is collecting the result of
-      each iteration into an array. Sometimes functions end with loops that are
-      intended to run only for their side-effects. Be careful that you're not
-      accidentally returning the results of the comprehension in these cases,
-      by adding a meaningful return value &mdash; like <tt>true</tt> &mdash; or <tt>null</tt>,
-      to the bottom of your function.
+      注意：上面的例子中我们展示了如何将推导式赋值给变量，CoffeeScript总是将
+      每个循环项收集到一个数组中。但是有时候以循环结尾的函数有着其他的目的。
+      这种情况下要注意不要将推导式作为函数返回值，而是返回一些有意义的值&mdash;
+      例如<tt>true</tt> &mdash; 或 <tt>null</tt>。
     </p>
     <p>
-      To step through a range comprehension in fixed-size chunks,
-      use <tt>by</tt>, for example:<br />
+      在推导式中使用<tt>by</tt>子句，可以实现以固定跨度迭代范围值：
       <tt>evens = (x for x in [0..10] by 2)</tt>
     </p>
     <p>
-      Comprehensions can also be used to iterate over the keys and values in
-      an object. Use <tt>of</tt> to signal comprehension over the properties of
-      an object instead of the values in an array.
+      推导式也可以用于迭代对象中的key和value。在推导式中使用<tt>of</tt>
+      来取出对象中的属性，而不是数组中的值。
     </p>
     <%= codeFor('object_comprehensions', 'ages.join(", ")') %>
     <p>
-      If you would like to iterate over just the keys that are defined on the
-      object itself, by adding a <tt>hasOwnProperty</tt>
-      check to avoid properties that may be inherited from the prototype, use<br />
+      如果你希望仅迭代在当前对象中定义的属性，通过<tt>hasOwnProperty</tt>检查并
+      避免属性是继承来的，可以这样来写：<br />
       <tt>for own key, value of object</tt>
     </p>
     <p>
-      The only low-level loop that CoffeeScript provides is the <b>while</b> loop. The
-      main difference from JavaScript is that the <b>while</b> loop can be used
-      as an expression, returning an array containing the result of each iteration
-      through the loop.
+      CoffeeScript仅提供了一种底层循环，即<b>while</b>循环。与JavaScript中的<b>while</b>
+      循环的主要区别是，在CoffeeScript中<b>while</b>可以作为表达式来使用，返回包含了
+      迭代结果的数组。
     </p>
     <%= codeFor('while', 'lyrics.join("\n")') %>
     <p>
-      For readability, the <b>until</b> keyword is equivalent to <tt>while not</tt>,
-      and the <b>loop</b> keyword is equivalent to <tt>while true</tt>.
+      为了更好的可读性，<b>until</b>关键字等同于<tt>while not</tt>, <b>loop</b>关键字
+      等同于<tt>while true</tt>。
     </p>
     <p>
       When using a JavaScript loop to generate functions, it's common to insert
