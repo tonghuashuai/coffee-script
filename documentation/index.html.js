@@ -469,13 +469,13 @@ Expressions
       <span id="loops" class="bookmark"></span>
       <b class="header">循环和推导式</b>
       你可以使用CoffeeScript将大多数的循环写成基于数组、对象或范围的推导式(comprehensions)。
-      推导式替代（编译为）<b>for</b>循环，并且可以使用附加的子句和数组索引值。
-      不同于<b>for</b>循环，数组的推导式是表达式，可以有返回值和赋值。
+      推导式替代（编译为）<b>for</b>循环，并且可以使用可选的子句和数组索引值。
+      不同于<b>for</b>循环，数组的推导式是表达式，可以被返回和赋值。
     </p>
     <%= codeFor('array_comprehensions') %>
     <p>
       推导式可以适用于其他一些使用循环的地方，例如<b>each</b>/<b>forEach</b>,
-      <b>map</b>，或者<b>select/</b><b>filter</b>，例如：
+      <b>map</b>，或者<b>select</b>/<b>filter</b>，例如：
       <tt>shortNames = (name for name in list when name.length &lt; 5)</tt><br />
       如果你知道循环的开始与结束，或者希望以固定的跨度迭代，你可以在范围推导式中
       指定开始与结束。
@@ -483,9 +483,10 @@ Expressions
     <%= codeFor('range_comprehensions', 'countdown') %>
     <p>
       注意：上面的例子中我们展示了如何将推导式赋值给变量，CoffeeScript总是将
-      每个循环项收集到一个数组中。但是有时候以循环结尾的函数有着其他的目的。
-      这种情况下要注意不要将推导式作为函数返回值，而是返回一些有意义的值&mdash;
-      例如<tt>true</tt> &mdash; 或 <tt>null</tt>。
+      每个循环项收集到一个数组中。但是有时候以循环结尾的函数运行的目的就是
+      它们的副作用(side-effects)。这种情况下要注意不要意外的返回推导式的结果，
+      而是在函数的结尾增加一些有意义的返回值&mdash;例如<tt>true</tt> &mdash;
+      或 <tt>null</tt>。
     </p>
     <p>
       在推导式中使用<tt>by</tt>子句，可以实现以固定跨度迭代范围值：
@@ -503,8 +504,8 @@ Expressions
     </p>
     <p>
       CoffeeScript仅提供了一种底层循环，即<b>while</b>循环。与JavaScript中的<b>while</b>
-      循环的主要区别是，在CoffeeScript中<b>while</b>可以作为表达式来使用，返回包含了
-      迭代结果的数组。
+      循环的主要区别是，在CoffeeScript中<b>while</b>可以作为表达式来使用，
+      而且可以返回一个数组，该数组包含每个迭代项的迭代结果。
     </p>
     <%= codeFor('while', 'lyrics.join("\n")') %>
     <p>
