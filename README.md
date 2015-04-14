@@ -6,6 +6,11 @@ CoffeeScript 中文翻译
 
 翻译自 coffee-script 1.7.1
 
+### 这个仓库不再维护!
+
+我认为 ES6 将成为主流, CoffeeScript 技术不可能大幅更新.
+因此以后以 ES6 为主, 不再跟进 CoffeeScript 的更新.
+
 ### 参与翻译
 
 步骤:

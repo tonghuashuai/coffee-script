@@ -513,113 +513,96 @@ Expressions
       等同于<tt>while true</tt>。
     </p>
     <p>
-      When using a JavaScript loop to generate functions, it's common to insert
-      a closure wrapper in order to ensure that loop variables are closed over,
-      and all the generated functions don't just share the final values. CoffeeScript
-      provides the <tt>do</tt> keyword, which immediately invokes a passed function,
-      forwarding any arguments.
+      使用 JavaScript 循环生成函数的时候, 经常会添加一个闭包来包裹代码,
+      这样做目的是为了循环的变量被保存起来, 而不是所有生成的函数搜去访问最后一个循环的变量.
+      CoffeeScript 提供了一个 <tt>do</tt> 关键字, 用来直接调用跟在后边的函数, 并且传递需要的参数.
     </p>
     <%= codeFor('do') %>
 
     <p>
       <span id="slices" class="bookmark"></span>
-      <b class="header">Array Slicing and Splicing with Ranges</b>
-      Ranges can also be used to extract slices of arrays.
-      With two dots (<tt>3..6</tt>), the range is inclusive (<tt>3, 4, 5, 6</tt>);
-      with three dots (<tt>3...6</tt>), the range excludes the end (<tt>3, 4, 5</tt>).
-      Slices indices have useful defaults. An omitted first index defaults to
-      zero and an omitted second index defaults to the size of the array.
+      <b class="header">数组的切片和用 range 进行拼接</b>
+      Range 也可以被用来展开数组的切片.
+      通过两个点号的写法 (<tt>3..6</tt>), range 会包含最后一个数据 (<tt>3, 4, 5, 6</tt>);
+      通过三个点号的写法 (<tt>3...6</tt>), range 不会包含最后一个数据 (<tt>3, 4, 5</tt>).
+      切片的索引位置存在不错的默认值. 前面的索引位置省略的话, 默认会是 0,
+      后面的索引位置被省略的话, 默认值是数组的大小.
     </p>
     <%= codeFor('slices', 'middle') %>
     <p>
-      The same syntax can be used with assignment to replace a segment of an array
-      with new values, splicing it.
+      同样的语法还可以用在数组的片段上赋值一些新的值, 进行拼接.
     </p>
     <%= codeFor('splices', 'numbers') %>
     <p>
-      Note that JavaScript strings are immutable, and can't be spliced.
+      注意 JavaScript 的 string 是不可变的, 所以不能用被拼接.
     </p>
     <p>
       <span id="expressions" class="bookmark"></span>
-      <b class="header">Everything is an Expression (at least, as much as possible)</b>
-      You might have noticed how even though we don't add return statements
-      to CoffeeScript functions, they nonetheless return their final value.
-      The CoffeeScript compiler tries to make sure that all statements in the
-      language can be used as expressions. Watch how the <tt>return</tt> gets
-      pushed down into each possible branch of execution in the function
-      below.
+      <b class="header">一切都是表达式 (至少尽可能成为)</b>
+      读者大概有注意到上面的代码 CoffeeScript 函数是不需要写 return 语句的, 但是也会返回最终的结果.
+      CoffeeScript 编译器会尽可能保证语言中所有的表达式都可以被当作表达式使用.
+      观察一下下面的函数, <tt>return</tt> 是怎样尽可能地插入到执行的分支当中的.
     </p>
     <%= codeFor('expressions', 'eldest') %>
     <p>
-      Even though functions will always return their final value, it's both possible
-      and encouraged to return early from a function body writing out the explicit
-      return (<tt>return value</tt>), when you know that you're done.
+      尽管函数总是会自动 return 其最终的值, 你可以在函数体前面显式地写上 (<tt>return value</tt>),
+      这个做法也是值得借鉴的, 前提是你明确你在做的事情是什么.
     </p>
     <p>
-      Because variable declarations occur at the top of scope, assignment can
-      be used within expressions, even for variables that haven't been seen before:
+      由于变量声明是生成在作用域顶部, 所以在表达式内部也可以写赋值, 即便是前面没写到过的变量.
     </p>
     <%= codeFor('expressions_assignment', 'six') %>
     <p>
-      Things that would otherwise be statements in JavaScript, when used
-      as part of an expression in CoffeeScript, are converted into expressions
-      by wrapping them in a closure. This lets you do useful things, like assign
-      the result of a comprehension to a variable:
+      有些代码在 JavaScript 当中要写不少的语句, 而在 CoffeeScript 中只是表达式的一部分,
+      这些代码的编译结果会自动生成一个闭包. 这个写法很有用, 比如把列表解析的结果赋值给变量:
     </p>
     <%= codeFor('expressions_comprehension', 'globals') %>
     <p>
-      As well as silly things, like passing a <b>try/catch</b> statement directly
-      into a function call:
+      结果是一些原来明确是语句的东西也可以像, 比如把 <b>try/catch</b> 语句直接传给函数调用:
     </p>
     <%= codeFor('expressions_try', true) %>
     <p>
-      There are a handful of statements in JavaScript that can't be meaningfully
-      converted into expressions, namely <tt>break</tt>, <tt>continue</tt>,
-      and <tt>return</tt>. If you make use of them within a block of code,
-      CoffeeScript won't try to perform the conversion.
+      有一些 JavaScript 语句是不能编译到表达式的对应的语义的, 比如 <tt>break</tt>, <tt>continue</tt> 和 <tt>return</tt>.
+      如果你的代码当中用到了它们, CoffeeScript 是步骤尝试去进行转换的.
     </p>
 
     <p>
       <span id="operators" class="bookmark"></span>
-      <b class="header">Operators and Aliases</b>
-      Because the <tt>==</tt> operator frequently causes undesirable coercion,
-      is intransitive, and has a different meaning than in other languages,
-      CoffeeScript compiles <tt>==</tt> into <tt>===</tt>, and <tt>!=</tt> into
-      <tt>!==</tt>.
-      In addition, <tt>is</tt> compiles into <tt>===</tt>,
-      and <tt>isnt</tt> into <tt>!==</tt>.
+      <b class="header">操作符和 aliase</b>
+      由于操作符 <tt>==</tt> 常常带来不准确的约束, 不容易达到效果, 而且跟其他语言当中意思不一致,
+      CoffeeScript 会把 <tt>==</tt> 编译为 <tt>===</tt>, 把 <tt>!=</tt> 变异为 <tt>!==</tt>.
+      此外, <tt>is</tt> 编译我 <tt>===</tt>, 而 <tt>isnt</tt> 编译为 <tt>!==</tt>.
     </p>
     <p>
-      You can use <tt>not</tt> as an alias for <tt>!</tt>.
+      <tt>not</tt> 可以作为 <tt>!</tt> 的 alias 使用.
     </p>
     <p>
-      For logic, <tt>and</tt> compiles to <tt>&amp;&amp;</tt>, and <tt>or</tt>
-      into <tt>||</tt>.
+      逻辑操作方面, <tt>and</tt> 编译为 <tt>&amp;&amp;</tt>, 而 <tt>or</tt> 编译为 <tt>||</tt>.
     </p>
     <p>
-      Instead of a newline or semicolon, <tt>then</tt> can be used to separate
-      conditions from expressions, in <b>while</b>,
-      <b>if</b>/<b>else</b>, and <b>switch</b>/<b>when</b> statements.
+      在 <b>while</b>, <b>if</b>/<b>else</b>, <b>switch</b>/<b>when</b> 的语句当中,
+      <tt>then</tt> 可以被用来分隔判断条件跟表达式, 这样就不用强制写换行或者分号了.
     </p>
     <p>
-      As in <a href="http://yaml.org/">YAML</a>, <tt>on</tt> and <tt>yes</tt>
-      are the same as boolean <tt>true</tt>, while <tt>off</tt> and <tt>no</tt> are boolean <tt>false</tt>.
+      就像 <a href="http://yaml.org/">YAML</a>, <tt>on</tt> 和 <tt>yes</tt>
+      跟 <tt>true</tt> 是一样的, 而 <tt>off</tt> 和 <tt>no</tt> 是布尔值 <tt>false</tt>.
     </p>
     <p>
-      <tt>unless</tt> can be used as the inverse of <tt>if</tt>.
+      <tt>unless</tt> 可以认为是 <tt>if</tt> 相反的版本.
     </p>
     <p>
-      As a shortcut for <tt>this.property</tt>, you can use <tt>@property</tt>.
+      <tt>this.property</tt> 简短的写法可以用 <tt>@property</tt>.
     </p>
     <p>
-      You can use <tt>in</tt> to test for array presence, and <tt>of</tt> to
-      test for JavaScript object-key presence.
+      可以用 <tt>in</tt> 判断数据在数组中是否出现, 而 <tt>of</tt>
+      可以探测 JavaScript 对象的属性是否存在.
     </p>
     <p>
-      To simplify math expressions, <tt>**</tt> can be used for exponentiation, <tt>//</tt> performs integer division and <tt>%%</tt> provides true mathematical modulo.
+      为了简化数学表达式, <tt>**</tt> 可以用来表示乘方, <tt>//</tt> 表示整除, <tt>%%</tt>
+      提供数学的模运算(译注: true mathematical modulo?).
     </p>
     <p>
-      All together now:
+      完整的列表:
     </p>
 
     <table class="definitions">
@@ -642,230 +625,200 @@ Expressions
     <%= codeFor('aliases') %>
 
     <p>
-      <b class="header">The Existential Operator</b>
-      It's a little difficult to check for the existence of a variable in
-      JavaScript. <tt>if (variable) ...</tt> comes close, but fails for zero,
-      the empty string, and false. CoffeeScript's existential operator <tt>?</tt> returns true unless
-      a variable is <b>null</b> or <b>undefined</b>, which makes it analogous
-      to Ruby's <tt>nil?</tt>
+      <b class="header">存在性操作符</b>
+      在 JavaScript 里检测一个变量的存在性有点麻烦.
+      <tt>if (variable) ...</tt> 比较接近答案, 但是对 `0` 不成立.
+      CoffeeScript 的存在性操作符 <tt>?</tt> 除非是 <b>null</b> 或者 <b>undefined</b>, 否则都返回 true,
+      这大致是模仿 Ruby 当中的 <tt>nil?</tt>.
     </p>
     <p>
-      It can also be used for safer conditional assignment than <tt>||=</tt>
-      provides, for cases where you may be handling numbers or strings.
+      这也可以用在比 <tt>||=</tt> 更安全的条件赋值当中, 有些情况你会需要处理数字跟字符串的.
+
     </p>
     <%= codeFor('existence', 'footprints') %>
     <p>
-      The accessor variant of the existential operator <tt>?.</tt> can be used to soak
-      up null references in a chain of properties. Use it instead
-      of the dot accessor <tt>.</tt> in cases where the base value may be <b>null</b>
-      or <b>undefined</b>. If all of the properties exist then you'll get the expected
-      result, if the chain is broken, <b>undefined</b> is returned instead of
-      the <b>TypeError</b> that would be raised otherwise.
+      存在性操作符 <tt>?.</tt> 的访问器的变体可以用来吸收链式属性调用中的 null.
+      数据可能是 <b>null</b> 或者 <b>undefined</b> 的情况下可以用这种写法替代访问器 <tt>.</tt>.
+      如果所有属性都存在, 那么你会得到想要的结果, 如果链式调用有问题, 会返回 <b>undefined</b>
+      而不是抛出 <b>TypeError</b>.
     </p>
     <%= codeFor('soaks') %>
     <p>
-      Soaking up nulls is similar to Ruby's
-      <a href="http://andand.rubyforge.org/">andand gem</a>, and to the
-      <a href="http://groovy.codehaus.org/Operators#Operators-SafeNavigationOperator%28%3F.%29">safe navigation operator</a>
-      in Groovy.
+      吸收 null 数据的做法类似 Ruby 的
+      <a href="http://andand.rubyforge.org/">andand gem</a>, 和 Groovy 的
+      <a href="http://groovy.codehaus.org/Operators#Operators-SafeNavigationOperator%28%3F.%29">safe navigation operator</a>.
     </p>
 
     <p>
       <span id="classes" class="bookmark"></span>
-      <b class="header">Classes, Inheritance, and Super</b>
-      JavaScript's prototypal inheritance has always been a bit of a
-      brain-bender, with a whole family tree of libraries that provide a cleaner
-      syntax for classical inheritance on top of JavaScript's prototypes:
+      <b class="header">class, 继承, super</b>
+      JavaScript 的原型集成有点烧脑, 存在大量的类库用于在 JavaScript 的原型之上实现更清晰的 class 继承比如:
       <a href="http://code.google.com/p/base2/">Base2</a>,
       <a href="http://prototypejs.org/">Prototype.js</a>,
-      <a href="http://jsclass.jcoglan.com/">JS.Class</a>, etc.
-      The libraries provide syntactic sugar, but the built-in inheritance would
-      be completely usable if it weren't for a couple of small exceptions:
-      it's awkward to call <b>super</b> (the prototype object's
-      implementation of the current function), and it's awkward to correctly
-      set the prototype chain.
+      <a href="http://jsclass.jcoglan.com/">JS.Class</a>.
+      这些类库提供了语法糖, 但如果不是因为一些例外的话原生的继承完全是可用的, 例外比如:
+      很难调用 <b>super</b>(当前函数的原型上的实现), 很难正确设置原型链.
     </p>
     <p>
-      Instead of repetitively attaching functions to a prototype, CoffeeScript
-      provides a basic <tt>class</tt> structure that allows you to name your class,
-      set the superclass, assign prototypal properties, and define the constructor,
-      in a single assignable expression.
+      相比重复地设置函数的原型, CoffeeScript 提供了一个基础的 <tt>class</tt> 结构,
+      你可以在一个定义的表达式里完成命名 class, 定义父类, 赋值原型上的属性, 定义构造器.
     </p>
     <p>
-      Constructor functions are named, to better support helpful stack traces.
-      In the first class in the example below, <tt>this.constructor.name is "Animal"</tt>.
+      构造函数被命名, 这对查看调用栈有更好的支持.
+      下面例子中的第一个类, <tt>this.constructor.name is "Animal"</tt>.
     </p>
     <%= codeFor('classes', true) %>
     <p>
-      If structuring your prototypes classically isn't your cup of tea, CoffeeScript
-      provides a couple of lower-level conveniences. The <tt>extends</tt> operator
-      helps with proper prototype setup, and can be used to create an inheritance
-      chain between any pair of constructor functions; <tt>::</tt> gives you
-      quick access to an object's prototype; and <tt>super()</tt>
-      is converted into a call against the immediate ancestor's method of the same name.
+      如果你不喜欢用 class 的裁判法定义原型, CoffeeScript 提供了一些低级的方便写法.
+      <tt>extends</tt> 操作符可以用来恰当地定义任何一对构造函数的原型链;
+      用 <tt>::</tt> 可以快速访问对象的原型;
+      <tt>super()</tt> 可以编译为一个父类上同名方法的调用.
     </p>
     <%= codeFor('prototypes', '"one_two".dasherize()') %>
     <p>
-      Finally, class definitions are blocks of executable code, which make for interesting
-      metaprogramming possibilities. Because in the context of a class definition,
-      <tt>this</tt> is the class object itself (the constructor function), you
-      can assign static properties by using <br /><tt>@property: value</tt>, and call
-      functions defined in parent classes: <tt>@attr 'title', type: 'text'</tt>
+      最后, class 定义是可执行的代码, 这样就可能进行元编程.
+      因为在 class 定义的上下文当中, <tt>this</tt> 是类对象本身(构造函数),
+      可以用 <tt>@property: value</tt> 赋值静态的属性,
+      也可以调用父类的方法: <tt>@attr 'title', type: 'text'</tt>.
     </p>
 
     <p>
       <span id="destructuring" class="bookmark"></span>
-      <b class="header">Destructuring Assignment</b>
-      To make extracting values from complex arrays and objects more convenient,
-      CoffeeScript implements ECMAScript Harmony's proposed
-      <a href="http://wiki.ecmascript.org/doku.php?id=harmony:destructuring">destructuring assignment</a>
-      syntax. When you assign an array or object literal to a value, CoffeeScript
-      breaks up and matches both sides against each other, assigning the values
-      on the right to the variables on the left. In the simplest case, it can be
-      used for parallel assignment:
+      <b class="header">解构赋值</b>
+      CoffeeScript 实现 ECMAScript Harmony 的提议
+      <a href="http://wiki.ecmascript.org/doku.php?id=harmony:destructuring">解构赋值</a>
+      语法, 这样从复杂的数组和对象展开数据会更方便一些.
+      当你把数组或者对象的字面量赋值到一个变量时, CoffeeScript 把等式两边都解开配对, 把右边的值赋值给左边的变量.
+      最简单的例子, 可以用来并行赋值:
     </p>
     <%= codeFor('parallel_assignment', 'theBait') %>
     <p>
-      But it's also helpful for dealing with functions that return multiple
-      values.
+      用来处理函数多返回值也很方便.
     </p>
     <%= codeFor('multiple_return_values', 'forecast') %>
     <p>
-      Destructuring assignment can be used with any depth of array and object nesting,
-      to help pull out deeply nested properties.
+      解构赋值可以用在深度嵌套的数组跟对象上, 取出深度嵌套的属性.
     </p>
     <%= codeFor('object_extraction', '"name + "-" + street"') %>
     <p>
-      Destructuring assignment can even be combined with splats.
+      解构赋值还可以跟 splats 搭配使用.
     </p>
     <%= codeFor('patterns_and_splats', 'contents.join("")') %>
     <p>
-      Expansion can be used to retrieve elements from the end of an array without having to assign the rest of its values. It works in function parameter lists as well.
+      展开式(expansion)可以用于获取数组结尾的元素, 而不需要对中间过程的数据进行赋值.
+      它也可以用在函数参数的列表上.
     </p>
     <%= codeFor('expansion', '"first + " " + last"') %>
     <p>
-      Destructuring assignment is also useful when combined with class constructors
-      to assign properties to your instance from an options object passed to the constructor.
+      解构赋值也可以用在 class 的构造器上, 从构造器配置对象赋值到示例属性上.
     </p>
     <%= codeFor('constructor_destructuring', 'tim.age') %>
 
     <p>
       <span id="fat-arrow" class="bookmark"></span>
-      <b class="header">Function binding</b>
-      In JavaScript, the <tt>this</tt> keyword is dynamically scoped to mean the
-      object that the current function is attached to. If you pass a function as
-      a callback or attach it to a different object, the original value of <tt>this</tt>
-      will be lost. If you're not familiar with this behavior,
+      <b class="header">函数绑定</b>
+      JavaScript 当中 <tt>this</tt> 关键字被动态地设定为当前函数挂载所在的对象上.
+      如果你爸函数当作回调, 或者挂载到别的对象, 那么原先的 <tt>this</tt> 就丢失了.
+      如果你不了解这个行为,
+      If you're not familiar with this behavior,
       <a href="http://www.digital-web.com/articles/scope_in_javascript/">this Digital Web article</a>
-      gives a good overview of the quirks.
+      对怪异模式做了很好的回顾.
     </p>
     <p>
-      The fat arrow <tt>=&gt;</tt> can be used to both define a function, and to bind
-      it to the current value of <tt>this</tt>, right on the spot. This is helpful
-      when using callback-based libraries like Prototype or jQuery, for creating
-      iterator functions to pass to <tt>each</tt>, or event-handler functions
-      to use with <tt>bind</tt>. Functions created with the fat arrow are able to access
-      properties of the <tt>this</tt> where they're defined.
+      Fat arrow <tt>=&gt;</tt> 可以同时定义函数, 绑定函数的 <tt>this</tt> 到当前的值, 正是我们需要的.
+      这有助于在 Prototype 或者 jQuery 这种基于回调的类库当中使用,
+      用于创建迭代器函数传递给 <tt>each</tt>, 或者借助 <tt>bind</tt> 的事件处理器函数.
+      Fat arrow 定义的函数可以访问到他们创建位置的 <tt>this</tt> 对象的属性.
     </p>
     <%= codeFor('fat_arrow') %>
     <p>
-      If we had used <tt>-&gt;</tt> in the callback above, <tt>@customer</tt> would
-      have referred to the undefined "customer" property of the DOM element,
-      and trying to call <tt>purchase()</tt> on it would have raised an exception.
+      如果上边用的是 <tt>this</tt>,
+      <tt>@customer</tt> 会指向一个 DOM 元素的 undefined "customer" 属性,
+      然后强行调用上面的 <tt>purchase()</tt> 时会抛出一个异常.
     </p>
     <p>
-      When used in a class definition, methods declared with the fat arrow will
-      be automatically bound to each instance of the class when the instance is
-      constructed.
+      对于类的定义, 实例创建的过程中 fat arrow 定义的方法会自动绑定到类的每个示例上去.
     </p>
 
     <p>
       <span id="embedded" class="bookmark"></span>
-      <b class="header">Embedded JavaScript</b>
-      Hopefully, you'll never need to use it, but if you ever need to intersperse
-      snippets of JavaScript within your CoffeeScript, you can
-      use backticks to pass it straight through.
+      <b class="header">嵌入 JavaScript</b>
+      这个写法应该不会被用到, 但如果什么时候需要在 CoffeeScript 中穿插 JavaScript 片段的话,
+      你可以用反引号直接传进去.
     </p>
     <%= codeFor('embedded', 'hi()') %>
 
     <p>
       <span id="switch" class="bookmark"></span>
       <b class="header">Switch/When/Else</b>
-      <b>Switch</b> statements in JavaScript are a bit awkward. You need to
-      remember to <b>break</b> at the end of every <b>case</b> statement to
-      avoid accidentally falling through to the default case.
-      CoffeeScript prevents accidental fall-through, and can convert the <tt>switch</tt>
-      into a returnable, assignable expression. The format is: <tt>switch</tt> condition,
-      <tt>when</tt> clauses, <tt>else</tt> the default case.
+      JavaScript 里的 <b>Switch</b> 语句有点难看.
+      你需要在每个 <b>case</b> 写 <b>break</b> 防止自动进入默认的 case.
+      CoffeeScript 会阻止掉意外的 fall-through.
+      而且 <tt>switch</tt> 编译的结果会是可以带 return, 可以被用于赋值的表达式.
+      格式这样写: <tt>switch</tt> 判断条件,
+      <tt>when</tt> 然后子句, <tt>else</tt> 然后默认的 case.
     </p>
     <p>
-      As in Ruby, <b>switch</b> statements in CoffeeScript can take multiple
-      values for each <b>when</b> clause. If any of the values match, the clause
-      runs.
+      就像 Ruby, CoffeeScript 里边 <b>switch</b> 语句对于每个子句可以带多个值.
+      任何一个值匹配的情况下, 子句就会执行.
     </p>
     <%= codeFor('switch') %>
 
     <p>
-      Switch statements can also be used without a control expression, turning them in to a cleaner alternative to if/else chains.
+      Switch 语句也可以不写控制条件, 当作 if/else 调用链的一个更整洁的可选写法.
     </p>
     <%= codeFor('switch_with_no_expression') %>
 
     <p>
       <span id="try" class="bookmark"></span>
       <b class="header">Try/Catch/Finally</b>
-      Try/catch statements are just about the same as JavaScript (although
-      they work as expressions).
+      Try/catch 语句基本上 JavaScript 的一样(尽管它们是表达式执行).
     </p>
     <%= codeFor('try') %>
 
     <p>
       <span id="comparisons" class="bookmark"></span>
       <b class="header">Chained Comparisons</b>
-      CoffeeScript borrows
-      <a href="http://docs.python.org/reference/expressions.html#notin">chained comparisons</a>
-      from Python &mdash; making it easy to test if a value falls within a
-      certain range.
+      CoffeeScript 从 Python 学习了
+      <a href="http://docs.python.org/reference/expressions.html#notin">链式对比</a>
+      &mdash; 这样判断数值是否在某个范围内在写法上更容易.
     </p>
     <%= codeFor('comparisons', 'healthy') %>
 
     <p>
       <span id="strings" class="bookmark"></span>
-      <b class="header">String Interpolation, Block Strings, and Block Comments</b>
-      Ruby-style string interpolation is included in CoffeeScript. Double-quoted
-      strings allow for interpolated values, using <tt>#{ ... }</tt>,
-      and single-quoted strings are literal.
+      <b class="header">字符串替换, 块级的字符串, 块级的注释</b>
+      Ruby 风格的字符串替换也在 CoffeeScript 实现了. 双引号包裹的字符串允许数据替换, 用 <tt>#{ ... }</tt> 语法,
+      而单引号包裹的字符串仅仅是字面量.
     </p>
     <%= codeFor('interpolation', 'sentence') %>
     <p>
-      Multiline strings are allowed in CoffeeScript. Lines are joined by a single space unless they end with a backslash. Indentation is ignored.
+      CoffeeScript 支持多行字符串.
+      行与行会用一个空格拼接, 除非结尾用了反斜杠.
+      其中缩进会被忽略.
     </p>
     <%= codeFor('strings', 'mobyDick') %>
     <p>
-      Block strings can be used to hold formatted or indentation-sensitive text
-      (or, if you just don't feel like escaping quotes and apostrophes). The
-      indentation level that begins the block is maintained throughout, so
-      you can keep it all aligned with the body of your code.
+      块级的字符串可以用于书写格式化的或者对缩进敏感的文本(或者你只是不想转义单引号双引号).
+      代码块开始的位置的缩进层级会被保留, 用在后面的代码中, 所以这部分代码依然可以跟整体的代码一起对齐.
     </p>
     <%= codeFor('heredocs', 'html') %>
     <p>
-      Double-quoted block strings, like other double-quoted strings, allow interpolation.
+      块级的字符串用双引号, 跟普通的双引号字符串一样, 支持替换.
     </p>
     <p>
-      Sometimes you'd like to pass a block comment through to the generated
-      JavaScript. For example, when you need to embed a licensing header at
-      the top of a file. Block comments, which mirror the syntax for block strings,
-      are preserved in the generated code.
+      有时候你想把整块的注释传给生成的 JavaScript. 比如在文件顶部嵌入协议.
+      块级的注释, 仿照了块级字符串的语法, 将会在生成的代码当中保留.
     </p>
     <%= codeFor('block_comment') %>
 
     <p>
       <span id="regexes" class="bookmark"></span>
-      <b class="header">Block Regular Expressions</b>
-      Similar to block strings and comments, CoffeeScript supports block regexes &mdash;
-      extended regular expressions that ignore internal whitespace and can contain
-      comments and interpolation. Modeled after Perl's <tt>/x</tt> modifier, CoffeeScript's
-      block regexes are delimited by <tt>///</tt> and go a long way towards making complex
-      regular expressions readable. To quote from the CoffeeScript source:
+      <b class="header">块级的正则表达式</b>
+      类似块级的字符串跟注释, CoffeeScript 支持块级的正则 &mdash;
+      扩展了正则表达式, 可以忽略内部的空格, 可以包含注释和替换.
+      模仿了 Perl 的 <tt>/x</tt> 修饰符, CoffeeScript 的块级正则以 <tt>///</tt> 为界,
+      让正则表达式获得了很大程度的可读性. 引用一下 CoffeeScript 源码:
     </p>
     <%= codeFor('heregexes') %>
 
